@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1>Profile </h1>
+
+  <div>
+    <h2>User Profile</h2>
+    <img :src="user.profilePicture" alt="Profile Picture" style="max-width: 100px; border-radius: 50%;" />
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Role:</strong> {{ user.isAdmin ? 'Admin' : 'User' }}</p>
+    <p><strong>Birthdate:</strong> {{ user.birthdate }}</p>
+    <p><strong>Age:</strong> {{ userAge }}</p>
+  </div>
+
+  <div>
+    <h2>Edit Profile</h2>
+    <form @submit.prevent="submitForm">
+      <label for="name">Name:</label>
+      <input type="text" v-model="user.name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" v-model="user.email" required />
+
+      <label for="birthdate">Birthdate:</label>
+      <input type="date" v-model="user.birthdate" required />
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
+  <div>
+    <h2>Change Picture</h2>
+    <input type="file" @change="updateProfilePicture" />
+  </div>
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    user: {
+      name: 'Cristiano Ronaldo',
+      email: 'ronaldo7@siuu.com',
+      profilePicture: 'default.jpg',
+      isAdmin: true,
+      birthdate: '1985-02-05',
+    },
+  },
+  computed: {
+    userAge() {
+      const birthdate = new Date(this.user.birthdate);
+      const today = new Date();
+      const age = today.getFullYear() - birthdate.getFullYear();
+      return age;
+    },
+  },
+  methods: {
+    submitForm() {
+      console.log('Profile Updated:', this.user);
+    },
+    updateProfilePicture(event) {
+      const file = event.target.files[0];
+      console.log('Profile Picture Updated:', file);
+    },
+  },
+  watch: {
+    user: {
+      handler(newUser, oldUser) {
+        console.log('User details modified:', newUser);
+      },
+      deep: true,
+    },
+  },
+  created() {
+  },
+});
+</script>
+
+</body>
+</html>

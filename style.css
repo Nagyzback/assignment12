@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(110, 110, 107);
+}
+.h1{
+    text-align: center;
+    border: 2px solid;
+    border-radius: 20px;
+}
+.div1{
+    text-align: center;
+    border: 2px solid;
+    border-radius: 20px;
+    margin-top: 2%;
+    font-size: larger;
+}
+.comp{
+    color: rgb(19, 219, 19);
+}
+.incomp{
+    color: rgb(237, 45, 45);
+}
